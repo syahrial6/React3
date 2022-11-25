@@ -31,3 +31,4 @@ class DetailPage extends React.Component {
 }
  
 export default DetailPageWrapper;
+

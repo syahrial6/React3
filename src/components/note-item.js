@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import DeleteButton from './Delete';
 
 
-function Noteitem({ id, title, body,createdAt }) {
+function Noteitem({ id, title, body,createdAt,onDelete }) {
     return (
       <article className='noteitem'>
         <h3 className='noteitem__title'>
@@ -13,7 +13,7 @@ function Noteitem({ id, title, body,createdAt }) {
         <p className='noteitem__createdAt'>{createdAt}</p>
         <p className='noteitem__body'>{body}</p>
         
-        <DeleteButton/>
+        <DeleteButton id={id} onDelete={onDelete}/>
       </article>
     );
   }

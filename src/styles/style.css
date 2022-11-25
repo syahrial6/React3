@@ -180,6 +180,62 @@ main {
 .AddNewPage__input__title::placeholder {
   color: var(--on-background-grey);
 }
+.input{
+  background-color: initial;
+    border: 0;
+    color: #fff;
+    color: var(--on-background);
+    font-family: Inter,sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    padding: 8px 0;
+    width: 100%;
+}
+
+.body{
+  background-color: initial;
+    border: 0;
+    color: #fff;
+    color: var(--on-background);
+    font-family: Inter,sans-serif;
+    font-size: 24px;
+    min-height: 500px;
+    padding: 8px 0;
+    width: 100%;
+}
+.tombol{
+  align-items: center;
+    background-color: #fff;
+    background-color: var(--on-background);
+    border: 0;
+    border-radius: 50px;
+    color: #121212;
+    color: var(--background);
+    cursor: pointer;
+    display: flex;
+    font-size: 32px;
+    height: 50px;
+    justify-content: center;
+    padding: 8px;
+    width: 50px;
+}
+
+.delete{
+  align-items: center;
+    background-color: #fff;
+    background-color: var(--on-background);
+    border: 0;
+    border-radius: 50px;
+    color: #121212;
+    color: var(--background);
+    cursor: pointer;
+    display: flex;
+    font-size: 32px;
+    height: 30px;
+    justify-content: center;
+    padding: 8px;
+    width: 30px;
+}
 
 .AddNewPage__input .AddNewPage__input__body {
   width: 100%;
