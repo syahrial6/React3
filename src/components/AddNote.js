@@ -39,7 +39,7 @@ class AddNote extends React.Component {
 
   render() {
    return (
-     <form classTitle='AddNewPage' onSubmit={this.onSubmitEventHandler}>
+     <form className='AddNewPage' onSubmit={this.onSubmitEventHandler}>
        <input type="text" placeholder="Judul" value={this.state.title} onChange={this.onTitleChangeEventHandler} className="input" />
        <input type="text" placeholder="Catatan" value={this.state.body} onChange={this.onBodyChangeEventHandler} className="body"/>
        <button type="submit" className='tombol'><FiCheck/></button>

@@ -28,7 +28,6 @@ class Homepage extends React.Component{
  
         this.onDeleteHandler = this.onDeleteHandler.bind(this);
         this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
-    console.log(this.state.notes)
       }
  
  

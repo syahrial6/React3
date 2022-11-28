@@ -4,10 +4,11 @@ import ItemDetail from '../components/Detail-item';
 import { getNote } from '../utils/local-data';
 
 
+
 function DetailPageWrapper() {
 
   const { id } = useParams();
-  return <DetailPage id={Number(id)} />;
+  return <DetailPage id={id} />;
 }
 
  
@@ -29,6 +30,7 @@ class DetailPage extends React.Component {
     );
   }
 }
+
  
 export default DetailPageWrapper;
 
