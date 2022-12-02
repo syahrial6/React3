@@ -1,78 +1,52 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-
-import { getAllNotes } from '../utils/local-data';
 import NotesList from '../components/notes-list'
+import { getActiveNotes,deleteNote } from '../utils/api';
 
 
 
-function HomePageWrapper(){
-    const [searchParams, setSearchParams] = useSearchParams();
+function Homepage(){
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [notes, setNotes] = React.useState([]);
+  const [keyword, setKeyword] = React.useState(() => {
+    return searchParams.get('keyword') || ''
+  });
 
-    const keyword = searchParams.get('keyword');
-  function changeSearchParams(keyword) {
+
+  React.useEffect(() => {
+    getActiveNotes().then(({ data }) => {
+      setNotes(data);
+    });
+  }, []);
+
+  async function onDeleteHandler(id) {
+    await deleteNote(id);
+    const { data } = await getActiveNotes();
+    setNotes(data);
+  }
+
+  function onKeywordChangeHandler(keyword) {
+    setKeyword(keyword);
     setSearchParams({ keyword });
+  }
 
-    }
+  const filtered = notes.filter((note) => {
+    return note.title.toLowerCase().includes(
+      keyword.toLowerCase()
+    );
+  });
 
-    return <Homepage defaultKeyword={keyword} keywordChange={changeSearchParams} />
-}
- 
- 
-class Homepage extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            notes : getAllNotes(),
-        }
- 
-        this.onDeleteHandler = this.onDeleteHandler.bind(this);
-        this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
-      }
- 
- 
-    onDeleteHandler(id) {
-        const notes = this.state.notes.filter(note => note.id !== id);
-        this.setState({ notes });
-    }
- 
-    onAddNoteHandler({title,body,id}){
-        this.setState((prevState)=>{
-          return {
-            notes : [
-              ...prevState.notes,
-              {
-                id :  +new Date(),
-                title,
-                body,
-              }
-            ]
-          }
-        })
-        alert("Catatan Ditambahkan")
-      }
-    render(){
- 
-      
-        return(
-          
-          <div className='app-container'>
-            <main>
-            { this.state.notes.length !== 0 && <NotesList notes={this.state.notes} onDelete={this.onDeleteHandler}/> }
-      { this.state.notes.length === 0 && <h2>Tidak Ada Catatan</h2> }
-        
-       
-        </main>
-            
-      
-    </div>
-    
+
+
+  
+  return(
+              <div className='app-container'>
+                <main>
+                { notes.length !== 0 && <NotesList notes={filtered} onDelete={onDeleteHandler}/> }
+          { notes.length === 0 && <h2>Tidak Ada Catatan</h2> }     
+               </main>      
+        </div>
         )
- 
- 
-        };
+  
 }
-
-export default HomePageWrapper;
-
-
+export default Homepage

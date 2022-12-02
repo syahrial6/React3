@@ -1,34 +1,28 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import ItemDetail from '../components/Detail-item';
-import { getNote } from '../utils/local-data';
-
-
+import { getNote } from '../utils/api';
 
 function DetailPageWrapper() {
-
+  const [note, setNote] = React.useState([]);
   const { id } = useParams();
-  return <DetailPage id={id} />;
-}
 
- 
-class DetailPage extends React.Component {
-  constructor(props) {
-    super(props);
- 
-    // cannot using Hooks inside class component
-    this.state = {
-      note: getNote(props.id)
-    };
-  }
- 
-  render() {
-    return (
-      <section>
-        <ItemDetail {...this.state.note} />
-      </section>
-    );
-  }
+  React.useEffect(() => {
+    const getnotes = async () => {
+      const datas = await getNote(id);
+      setNote(datas.data);
+      
+    }
+    getnotes()
+  }, [id]);
+  return(
+    <section>
+      <div>
+      <h2>{note.title}</h2>
+      <p>{note.createdAt}</p>
+      <p>{note.body}</p>
+    </div>
+    </section>
+  )
 }
 
  

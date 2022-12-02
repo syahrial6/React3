@@ -103,7 +103,15 @@ function editNote({ id, title, body }) {
     return note;
   });
 }
-
+const showFormattedDate = () => {
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  }
+  return new Date().toLocaleDateString("id-ID", options)
+}
 export {
   getAllNotes,
   getActiveNotes,
@@ -114,4 +122,5 @@ export {
   archiveNote,
   unarchiveNote,
   addNote,
+  showFormattedDate
 };

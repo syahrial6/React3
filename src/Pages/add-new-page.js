@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddNote from '../components/AddNote';
-import { addNote } from '../utils/local-data';
 import swal from 'sweetalert';
+import { addNote } from '../utils/api';
  
 function AddPage() {
     const navigate = useNavigate();
