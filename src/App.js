@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import Switch from "react-switch";
 import Navigation from './components/Navigation';
 import { Routes, Route } from 'react-router-dom';
 import AddPage from './Pages/add-new-page';
@@ -8,7 +9,7 @@ import { putAccessToken,getUserLogged } from './utils/api';
 import Register from './Pages/Register';
 import HomePageWrapper from './Pages/Homepage';
 import { ThemeProvider } from './CustomHook/ThemeContext';
-import ToggleModes from './CustomHook/ToggleMode';
+
 
 
 
@@ -20,18 +21,26 @@ import ToggleModes from './CustomHook/ToggleMode';
 function App() {
   const [authedUser,setauthedUser] = useState(null);
 
-  const [mode,setMode] = React.useState("light")
+  const [mode, setMode] = useState('dark')
   
   const toggleMode = () => {
-    setMode((prevMode) => {
-      return prevMode === 'light' ? 'dark' : 'light';
-    });
-  };
+  setMode((mode) => 
+  (mode === 'light' ? 'dark' : 'light'));
+  }
+  // useEffect((prevMode) => {
+  //   if (prevMode !== mode) {
+  //     document.documentElement.setAttribute('data-theme', mode);
+  //   }
+  // },);
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', mode);
+    localStorage.setItem('theme', mode);
+  }, [mode]);
   
 useEffect(() => { 
     const { data } =getUserLogged();
     setauthedUser(data)
-  }, []  );
+  }, [mode]  );
 
 
   const onLogout=()=> {
@@ -53,7 +62,7 @@ if(authedUser=== null){
     
     <div className="app-container">
       <header >
-        <h1>Aplikasi Kontak</h1>
+        <h1>Aplikasi Catatan</h1>
       </header>
       <main className='homepage'>
         <Routes>
@@ -69,12 +78,13 @@ if(authedUser=== null){
 }
 else{
   return(
-    <ThemeProvider value={[mode,toggleMode]}>
-    <div className="app-container">
+    <ThemeProvider value={mode}>
+    <div className="app-container" id={mode}>
       <header >
-        <h1>Aplikasi Kontak</h1>
+        <h1>Aplikasi Catatan</h1>
         <Navigation logout={onLogout}/>
-        <ToggleModes/>
+        <Switch onChange={toggleMode} checked={mode==="dark"} />
+
       </header>
       
       <main className='homepage'>

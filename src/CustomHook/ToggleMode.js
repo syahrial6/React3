@@ -1,13 +1,11 @@
-import { ThemeConsumer } from "./ThemeContext";
-import { FiMoon, FiSun } from 'react-icons/fi';
 
-function ToggleModes() {
+import {  FiMoon } from 'react-icons/fi';
+
+function ToggleModes(changemode) {
     return (
-      <ThemeConsumer>
-        {({ mode, toggleMode }) => {
-          return <button onClick={toggleMode}>{mode === 'light' ? <FiMoon /> : <FiSun />}</button>;
-        }}
-      </ThemeConsumer>
+      <div>
+        <button onClick={changemode}>{<FiMoon />}</button>
+        </div>
     );
   }
    

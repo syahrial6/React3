@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AddNote from '../components/AddNote';
 import swal from 'sweetalert';
 import { addNote } from '../utils/api';
+import PropTypes from 'prop-types';
  
 function AddPage() {
     const navigate = useNavigate();
@@ -22,5 +23,9 @@ function AddPage() {
     </main>
   )
 }
+AddPage.propTypes = {
+  addNote: PropTypes.func.isRequired,
+  
+ }
  
 export default AddPage;
